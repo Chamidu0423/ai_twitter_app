@@ -8,7 +8,7 @@ import numpy as np
 
 print("Loading AI Model...")
 
-model_path = os.path.join(settings.BASE_DIR, 'toxicity_model.h5')
+model_path = os.path.join(settings.BASE_DIR, 'toxicity_model.keras')
 
 try:
     model = load_model(model_path)
@@ -28,7 +28,11 @@ def create_post(request):
     if model is None:
         return Response({'error': 'AI model is not loaded'}, status=500)
 
-    prediction = model.predict([tweet_text])
+    prediction = model.predict(tf.constant([tweet_text])) 
+
+    print(f"DEBUG: TEXT = '{tweet_text}' | Score = {prediction[0][0]}")
+
+    is_toxic = prediction[0][0] > 0.5
 
     if is_toxic:
         return Response({

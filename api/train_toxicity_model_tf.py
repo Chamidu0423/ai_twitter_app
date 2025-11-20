@@ -103,5 +103,5 @@ history = model.fit(
 print("\nTraining Completed!")
 print("\n---Saving the Model---")
 
-model.save('toxicity_model.h5')
-print("Model saved successfully as 'toxicity_model.h5'!")
+model.save('toxicity_model.keras')
+print("Model saved successfully as 'toxicity_model.keras'!")
