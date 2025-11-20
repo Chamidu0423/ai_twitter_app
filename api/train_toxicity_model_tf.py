@@ -62,3 +62,46 @@ print("TextVectorization layer created.")
 print("Adapting the vectorizer (building the dictionary)...")
 vectorize_layer.adapt(x)
 print("Vectorizer adapted. Dictionary is built.")
+
+print("\n---Building the complete AI Model---")
+EMBEDDING_DIM = 16
+
+model = Sequential([
+    vectorize_layer,
+    Embedding(MAX_FEATURES, EMBEDDING_DIM),
+    GlobalAveragePooling1D(),
+    Dense(1, activation = 'sigmoid')
+])
+
+print("Model layers created (Vectorizer, Embedding, Pooling, Dense).")
+
+model.compile(
+    optimizer = 'adam',
+    loss = 'binary_crossentropy',
+    metrics = ['accuracy']
+)
+
+print("Model compiled successfully.")
+
+print("\n---Model Summary---")
+model.summary()
+
+import numpy as np
+x = np.array(x)
+y = np.array(y)
+
+print("\n---Training the AI Model---")
+
+history = model.fit(
+    x,
+    y,
+    epochs = 5,
+    validation_split = 0.2,
+    batch_size = 32
+)
+
+print("\nTraining Completed!")
+print("\n---Saving the Model---")
+
+model.save('toxicity_model.h5')
+print("Model saved successfully as 'toxicity_model.h5'!")
