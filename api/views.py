@@ -8,7 +8,7 @@ import numpy as np
 
 print("Loading AI Model...")
 
-model_path = os.path,join(settings.BASE_DIR, 'toxicity_model.h5')
+model_path = os.path.join(settings.BASE_DIR, 'toxicity_model.h5')
 
 try:
     model = load_model(model_path)
