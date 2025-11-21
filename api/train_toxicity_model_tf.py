@@ -95,7 +95,7 @@ print("\n---Training the AI Model---")
 history = model.fit(
     x,
     y,
-    epochs = 5,
+    epochs = 100,
     validation_split = 0.2,
     batch_size = 32
 )
