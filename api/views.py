@@ -32,7 +32,7 @@ def create_post(request):
 
     print(f"DEBUG: TEXT = '{tweet_text}' | Score = {prediction[0][0]}")
 
-    is_toxic = prediction[0][0] > 0.5
+    is_toxic = prediction[0][0] > 0.75
 
     if is_toxic:
         return Response({
